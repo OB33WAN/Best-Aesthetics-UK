@@ -13,6 +13,16 @@
   var lightbox      = document.getElementById("lightbox");
   var lightboxImg   = document.getElementById("lightbox-img");
   var lightboxClose = document.getElementById("lightbox-close");
+  var isLocalPreview =
+    window.location.hostname === "127.0.0.1" ||
+    window.location.hostname === "localhost" ||
+    /vscode-livepreview=true/.test(window.location.search);
+
+  if (isLocalPreview) {
+    document.querySelectorAll("img[loading='lazy']").forEach(function (img) {
+      img.loading = "eager";
+    });
+  }
 
   /* ─── Year ───────────────────────────────────────────── */
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());

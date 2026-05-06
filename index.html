@@ -6,11 +6,17 @@
     <script>
       (function () {
         var path = window.location.pathname;
+        var isLocalPreview =
+          window.location.hostname === "127.0.0.1" ||
+          window.location.hostname === "localhost" ||
+          /vscode-livepreview=true/.test(window.location.search);
         if (/index\.html\/$/.test(path)) {
           window.location.replace(window.location.href.replace(/index\.html\/$/, "index.html"));
           return;
         }
-        document.documentElement.classList.add("js");
+        if (!isLocalPreview) {
+          document.documentElement.classList.add("js");
+        }
       })();
     </script>
 
@@ -103,7 +109,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=20260506-1" />
     <link rel="icon" type="image/png" href="images/logo-header.png" />
   </head>
   <body>
@@ -784,7 +790,7 @@
       </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=20260506-1"></script>
 
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" hidden>
