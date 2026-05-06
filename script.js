@@ -62,7 +62,7 @@
   /* ─── Preloader ─────────────────────────────────────── */
   window.addEventListener("load", function () {
     var elapsed = Date.now() - preloaderStartedAt;
-    var minVisible = 1100;
+    var minVisible = 2400;
     var wait = Math.max(minVisible - elapsed, 0);
     setTimeout(function () {
       document.documentElement.classList.remove("is-loading");
