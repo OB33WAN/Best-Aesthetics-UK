@@ -198,18 +198,33 @@ body {
   }
 
   .site-nav {
-    position: fixed;
-    inset: var(--header-h) 0 0 0;
-    background: var(--color-bg);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: calc(100vh - var(--header-h));
+    z-index: 99;
+    background: #ffffff;
     padding: var(--space-lg);
+    overflow-y: auto;
+    border-top: 2px solid var(--color-gold-mid);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.14);
+    transform: translateY(-8px);
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s var(--ease-out), visibility 0.3s;
+    transition: opacity 0.3s var(--ease-out), visibility 0.3s, transform 0.3s var(--ease-out);
   }
 
   .site-nav.is-open {
     opacity: 1;
     visibility: visible;
+    transform: translateY(0);
+  }
+
+  .site-header.nav-open {
+    background: #ffffff;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   .nav-list {
@@ -1457,4 +1472,289 @@ body {
   flex-basis: 100%;
   font-size: 0.8125rem;
   color: rgba(255, 255, 255, 0.5);
+}
+
+/* ============================================================
+   ANCHOR SCROLL OFFSET
+   ============================================================ */
+section[id] {
+  scroll-margin-top: calc(var(--header-h) + 1rem);
+}
+
+/* ============================================================
+   ACTIVE NAV LINK
+   ============================================================ */
+.nav-list a.is-active {
+  color: var(--color-gold-dark);
+}
+
+/* ============================================================
+   HEADER SCROLLED STATE
+   ============================================================ */
+.site-header.is-scrolled {
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.09);
+}
+
+/* ============================================================
+   STATS BAR
+   ============================================================ */
+.stats-bar {
+  background: var(--color-ink);
+  border-bottom: 1px solid rgba(196, 160, 53, 0.22);
+  padding: var(--space-lg) var(--space-md);
+}
+
+.stats-bar__inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+  text-align: center;
+}
+
+@media (min-width: 40rem) {
+  .stats-bar__inner {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+  }
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: var(--space-md);
+  border: 1px solid rgba(196, 160, 53, 0.18);
+  border-radius: var(--radius);
+  transition: border-color 0.25s var(--ease-out), background 0.25s;
+}
+
+.stat-item:hover {
+  border-color: rgba(196, 160, 53, 0.55);
+  background: rgba(196, 160, 53, 0.05);
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3.5vw, 2.35rem);
+  font-weight: 600;
+  color: var(--color-gold);
+  line-height: 1.1;
+}
+
+.stat-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal--left {
+  transform: translateX(-28px);
+}
+
+.reveal--left.is-visible {
+  transform: none;
+}
+
+.reveal--right {
+  transform: translateX(28px);
+}
+
+.reveal--right.is-visible {
+  transform: none;
+}
+
+.reveal--delay-1 { transition-delay: 0.08s; }
+.reveal--delay-2 { transition-delay: 0.16s; }
+.reveal--delay-3 { transition-delay: 0.24s; }
+.reveal--delay-4 { transition-delay: 0.32s; }
+.reveal--delay-5 { transition-delay: 0.40s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ============================================================
+   ENHANCED HOVER EFFECTS
+   ============================================================ */
+
+/* Service cards */
+.service-card {
+  transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out), border-top-color 0.25s;
+  cursor: default;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 28px 56px rgba(10, 10, 10, 0.1);
+  border-top-color: var(--color-gold);
+}
+
+/* About figure zoom on hover */
+.about-figure {
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+
+.about-figure img {
+  transition: transform 0.55s var(--ease-out);
+}
+
+.about-figure:hover img {
+  transform: scale(1.04);
+}
+
+/* Gallery mosaic hover zoom + lift */
+.gallery-mosaic__item {
+  cursor: zoom-in;
+  transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-mosaic__item:hover {
+  transform: scale(1.04);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+.gallery-mosaic__img {
+  transition: transform 0.45s var(--ease-out);
+}
+
+.gallery-mosaic__item:hover .gallery-mosaic__img {
+  transform: scale(1.07);
+}
+
+/* Gallery strip hover */
+.gallery-strip > img {
+  transition: transform 0.5s var(--ease-out);
+  overflow: hidden;
+}
+
+/* ============================================================
+   LIGHTBOX
+   ============================================================ */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(10, 10, 10, 0.96);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s var(--ease-out), visibility 0.3s;
+}
+
+.lightbox[hidden] {
+  display: none;
+}
+
+.lightbox.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox__img {
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: var(--radius);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.6);
+  cursor: default;
+  transform: scale(0.96);
+  transition: transform 0.35s var(--ease-out);
+}
+
+.lightbox.is-open .lightbox__img {
+  transform: scale(1);
+}
+
+.lightbox__close {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  width: 2.75rem;
+  height: 2.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  z-index: 1;
+}
+
+.lightbox__close:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* ============================================================
+   BACK TO TOP
+   ============================================================ */
+.back-to-top {
+  position: fixed;
+  bottom: var(--space-lg);
+  right: var(--space-lg);
+  z-index: 200;
+  width: 2.75rem;
+  height: 2.75rem;
+  background: var(--color-gold-mid);
+  color: var(--color-ink);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.22);
+  opacity: 0;
+  transform: translateY(0.75rem);
+  transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out), background 0.2s;
+  pointer-events: none;
+}
+
+.back-to-top[hidden] {
+  display: flex; /* override browser hidden; visibility handled by opacity/pointer-events */
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.back-to-top:hover {
+  background: var(--color-gold);
 }
