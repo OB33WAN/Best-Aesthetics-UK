@@ -1556,9 +1556,14 @@ section[id] {
    SCROLL REVEAL
    ============================================================ */
 .reveal {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+
+.js .reveal {
   opacity: 0;
   transform: translateY(28px);
-  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
 }
 
 .reveal.is-visible {
@@ -1567,6 +1572,10 @@ section[id] {
 }
 
 .reveal--left {
+  transform: none;
+}
+
+.js .reveal--left {
   transform: translateX(-28px);
 }
 
@@ -1575,6 +1584,10 @@ section[id] {
 }
 
 .reveal--right {
+  transform: none;
+}
+
+.js .reveal--right {
   transform: translateX(28px);
 }
 
