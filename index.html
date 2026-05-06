@@ -14,21 +14,35 @@
           window.location.replace(window.location.href.replace(/index\.html\/$/, "index.html"));
           return;
         }
+        window.__baPreloaderStartedAt = Date.now();
         document.documentElement.classList.add("is-loading");
         if (!isLocalPreview) document.documentElement.classList.add("js");
       })();
     </script>
     <title>Best Aesthetics | Nurse-Led Aesthetics Clinic in Appleford-on-Thames, Oxfordshire</title>
     <meta name="description" content="Best Aesthetics is a nurse-led clinic in Appleford-on-Thames offering anti-wrinkle treatments, dermal fillers, microneedling, vitamin B12 and IV drip therapy. Serving Oxfordshire, Didcot, Abingdon and Oxford." />
-    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
     <link rel="canonical" href="https://bestaesthetics.uk/" />
-    <link rel="stylesheet" href="styles.css?v=20260506-2" />
-    <link rel="icon" type="image/png" href="images/logo-header.png" />
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Best Aesthetics" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://bestaesthetics.uk/images/app-icon-512.png" />
+    <meta property="og:image:alt" content="Best Aesthetics transparent logo" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://bestaesthetics.uk/images/app-icon-512.png" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" type="image/png" href="images/app-icon-512.png" />
+    <link rel="apple-touch-icon" href="images/app-icon-512.png" />
+    <link rel="stylesheet" href="styles.css?v=20260506-3" />
   </head>
   <body>
     <div class="site-preloader" id="site-preloader">
-      <img class="site-preloader__logo" src="images/logo-header.png" alt="Best Aesthetics" />
+      <img class="site-preloader__logo" src="images/LOGO with clear background.png" alt="Best Aesthetics" />
       <div class="site-preloader__bar" aria-hidden="true"></div>
+      <p class="site-preloader__caption">Preparing your experience</p>
     </div>
 
     <a class="skip-link" href="#main">Skip to content</a>
@@ -139,6 +153,9 @@
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 13V3M3 8l5-5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
 
-    <script src="script.js?v=20260506-2"></script>
+    <script src="script.js?v=20260506-3"></script>
   </body>
 </html>
+
+
+

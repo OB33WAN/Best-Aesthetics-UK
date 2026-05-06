@@ -6,6 +6,7 @@
     <script>
       (function () {
         var isLocalPreview = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost" || /vscode-livepreview=true/.test(window.location.search);
+        window.__baPreloaderStartedAt = Date.now();
         document.documentElement.classList.add("is-loading");
         if (!isLocalPreview) document.documentElement.classList.add("js");
       })();
@@ -13,10 +14,24 @@
     <title>About | Best Aesthetics Oxfordshire</title>
     <meta name="description" content="About Best Aesthetics and Iwona Pawlik RGN. Learn about our nurse-led approach, safety standards and natural aesthetic treatment philosophy." />
     <link rel="canonical" href="https://bestaesthetics.uk/about.html" />
-    <link rel="stylesheet" href="styles.css?v=20260506-2" />
-  </head>
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Best Aesthetics" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://bestaesthetics.uk/images/app-icon-512.png" />
+    <meta property="og:image:alt" content="Best Aesthetics transparent logo" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://bestaesthetics.uk/images/app-icon-512.png" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" type="image/png" href="images/app-icon-512.png" />
+    <link rel="apple-touch-icon" href="images/app-icon-512.png" />
+    <link rel="stylesheet" href="styles.css?v=20260506-3" />
+    </head>
   <body>
-    <div class="site-preloader" id="site-preloader"><img class="site-preloader__logo" src="images/logo-header.png" alt="Best Aesthetics" /><div class="site-preloader__bar" aria-hidden="true"></div></div>
+    <div class="site-preloader" id="site-preloader"><img class="site-preloader__logo" src="images/LOGO with clear background.png" alt="Best Aesthetics" /><div class="site-preloader__bar" aria-hidden="true"></div>
+      <p class="site-preloader__caption">Preparing your experience</p></div>
     <header class="site-header" id="top"><div class="header-inner"><a class="logo" href="index.html"><img class="logo__img" src="images/logo-header.png" alt="Best Aesthetics" /></a><button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><span class="nav-toggle-bar" aria-hidden="true"></span><span class="nav-toggle-bar" aria-hidden="true"></span></button><nav class="site-nav" id="site-nav"><ul class="nav-list"><li><a data-page="about.html" href="about.html">About</a></li><li><a data-page="case-studies.html" href="case-studies.html">Case studies</a></li><li><a data-page="gallery.html" href="gallery.html">Gallery</a></li><li><a data-page="services.html" href="services.html">Services</a></li><li><a data-page="prices.html" href="prices.html">Prices</a></li><li><a data-page="approach.html" href="approach.html">Approach</a></li><li><a data-page="faq.html" href="faq.html">FAQ</a></li><li><a data-page="instagram.html" href="instagram.html">Instagram</a></li><li><a data-page="contact.html" href="contact.html" class="nav-cta">Book</a></li></ul></nav></div></header>
     <main id="main">
       <section class="page-hero"><div class="page-hero__inner"><p class="page-hero__eyebrow">About</p><h1>About Best Aesthetics</h1><p>Nurse-led care, natural outcomes, and long-term facial harmony.</p></div></section>
@@ -24,6 +39,9 @@
     </main>
     <footer class="site-footer"><div class="footer-inner"><p class="footer-location">1 Main Road · Appleford-on-Thames · OX14 4PG</p><p class="footer-meta">&copy; <span id="year"></span> Best Aesthetics.</p></div></footer>
     <button class="back-to-top" id="back-to-top" aria-label="Scroll back to top" hidden><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 13V3M3 8l5-5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-    <script src="script.js?v=20260506-2"></script>
+    <script src="script.js?v=20260506-3"></script>
   </body>
 </html>
+
+
+

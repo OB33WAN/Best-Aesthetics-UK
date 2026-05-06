@@ -1,0 +1,40 @@
+{
+  "name": "Best Aesthetics",
+  "short_name": "Best Aes",
+  "description": "Nurse-led aesthetic treatments in Appleford-on-Thames, Oxfordshire.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "categories": ["health", "beauty", "medical"],
+  "icons": [
+    {
+      "src": "images/app-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/app-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Book Consultation",
+      "short_name": "Book",
+      "url": "/contact.html",
+      "description": "Book a consultation with Best Aesthetics"
+    },
+    {
+      "name": "View Services",
+      "short_name": "Services",
+      "url": "/services.html",
+      "description": "Browse aesthetic treatments"
+    }
+  ]
+}

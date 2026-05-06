@@ -5,7 +5,7 @@
   var header      = document.querySelector(".site-header");
   var nav         = document.querySelector(".site-nav");
   var toggle      = document.querySelector(".nav-toggle");
-  var navLinks    = document.querySelectorAll(".site-nav a[href^='#']");
+  var navLinks    = document.querySelectorAll(".site-nav a");
   var yearEl      = document.getElementById("year");
   var form        = document.querySelector(".contact-form");
   var formNote    = document.querySelector(".form-note");
@@ -48,6 +48,7 @@
   var consentMarketing = document.getElementById("consent-marketing");
   var consentKey = "ba_cookie_consent_v1";
   var preloader = document.getElementById("site-preloader");
+  var preloaderStartedAt = window.__baPreloaderStartedAt || Date.now();
   var isLocalPreview =
     window.location.hostname === "127.0.0.1" ||
     window.location.hostname === "localhost" ||
@@ -61,12 +62,18 @@
 
   /* ─── Preloader ─────────────────────────────────────── */
   window.addEventListener("load", function () {
-    document.documentElement.classList.remove("is-loading");
-    if (!preloader) return;
-    preloader.classList.add("is-hidden");
+    var elapsed = Date.now() - preloaderStartedAt;
+    var minVisible = 1100;
+    var wait = Math.max(minVisible - elapsed, 0);
     setTimeout(function () {
-      preloader.setAttribute("hidden", "");
-    }, 420);
+      document.documentElement.classList.remove("is-loading");
+      document.documentElement.classList.add("is-ready");
+      if (!preloader) return;
+      preloader.classList.add("is-hidden");
+      setTimeout(function () {
+        preloader.setAttribute("hidden", "");
+      }, 520);
+    }, wait);
   });
 
   /* ─── Active page link ──────────────────────────────── */
@@ -76,6 +83,47 @@
       link.classList.toggle("is-active", link.getAttribute("data-page") === path);
     });
   })();
+
+  /* ─── Internal page transitions ─────────────────────── */
+  document.querySelectorAll("a[href]").forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      var href = link.getAttribute("href") || "";
+      if (!href || href.charAt(0) === "#") return;
+      if (link.hasAttribute("download")) return;
+      if (link.target && link.target !== "_self") return;
+      if (/^(mailto:|tel:|javascript:)/i.test(href)) return;
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+
+      var url;
+      try {
+        url = new URL(href, window.location.href);
+      } catch (err) {
+        return;
+      }
+
+      if (url.origin !== window.location.origin) return;
+      if (url.pathname === window.location.pathname && url.hash) return;
+
+      e.preventDefault();
+      document.documentElement.classList.add("is-leaving");
+      if (preloader) {
+        preloader.removeAttribute("hidden");
+        preloader.classList.remove("is-hidden");
+      }
+      setTimeout(function () {
+        window.location.href = url.href;
+      }, 320);
+    });
+  });
+
+  /* ─── PWA service worker ────────────────────────────── */
+  if ("serviceWorker" in navigator && !isLocalPreview) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("sw.js").catch(function () {
+        /* no-op */
+      });
+    });
+  }
 
   /* ─── Year ───────────────────────────────────────────── */
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
