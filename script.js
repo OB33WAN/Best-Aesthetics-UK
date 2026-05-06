@@ -17,6 +17,28 @@
   var serviceCards = document.querySelectorAll(".service-card[data-category]");
   var faqButtons = document.querySelectorAll(".faq-question");
   var cookieBanner = document.getElementById("cookie-banner");
+  if (!cookieBanner) {
+    var bannerHost = document.createElement("div");
+    bannerHost.innerHTML =
+      '<aside class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Cookie preferences" hidden>' +
+      '<div class="cookie-banner__inner">' +
+      '<h2 class="cookie-banner__title">Cookie preferences</h2>' +
+      '<p class="cookie-banner__text">We use essential cookies for functionality and optional cookies for analytics and marketing.</p>' +
+      '<div class="cookie-banner__actions">' +
+      '<button type="button" class="btn btn-ghost cookie-btn" id="cookie-reject">Reject optional</button>' +
+      '<button type="button" class="btn btn-ghost cookie-btn" id="cookie-manage">Manage</button>' +
+      '<button type="button" class="btn btn-primary cookie-btn" id="cookie-accept">Accept all</button>' +
+      '</div></div>' +
+      '<div class="cookie-panel" id="cookie-panel" hidden>' +
+      '<h3 class="cookie-panel__title">Manage cookie settings</h3>' +
+      '<label class="cookie-option"><input type="checkbox" checked disabled /><span>Essential cookies (required)</span></label>' +
+      '<label class="cookie-option"><input type="checkbox" id="consent-analytics" /><span>Analytics cookies</span></label>' +
+      '<label class="cookie-option"><input type="checkbox" id="consent-marketing" /><span>Marketing cookies</span></label>' +
+      '<button type="button" class="btn btn-primary cookie-btn" id="cookie-save">Save preferences</button>' +
+      '</div></aside>';
+    document.body.appendChild(bannerHost.firstChild);
+  }
+
   var cookiePanel = document.getElementById("cookie-panel");
   var cookieAccept = document.getElementById("cookie-accept");
   var cookieReject = document.getElementById("cookie-reject");
@@ -25,6 +47,7 @@
   var consentAnalytics = document.getElementById("consent-analytics");
   var consentMarketing = document.getElementById("consent-marketing");
   var consentKey = "ba_cookie_consent_v1";
+  var preloader = document.getElementById("site-preloader");
   var isLocalPreview =
     window.location.hostname === "127.0.0.1" ||
     window.location.hostname === "localhost" ||
@@ -35,6 +58,24 @@
       img.loading = "eager";
     });
   }
+
+  /* ─── Preloader ─────────────────────────────────────── */
+  window.addEventListener("load", function () {
+    document.documentElement.classList.remove("is-loading");
+    if (!preloader) return;
+    preloader.classList.add("is-hidden");
+    setTimeout(function () {
+      preloader.setAttribute("hidden", "");
+    }, 420);
+  });
+
+  /* ─── Active page link ──────────────────────────────── */
+  (function setActivePageLink() {
+    var path = window.location.pathname.split("/").pop() || "index.html";
+    document.querySelectorAll(".nav-list a[data-page]").forEach(function (link) {
+      link.classList.toggle("is-active", link.getAttribute("data-page") === path);
+    });
+  })();
 
   /* ─── Year ───────────────────────────────────────────── */
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
