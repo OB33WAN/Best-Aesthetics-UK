@@ -13,6 +13,18 @@
   var lightbox      = document.getElementById("lightbox");
   var lightboxImg   = document.getElementById("lightbox-img");
   var lightboxClose = document.getElementById("lightbox-close");
+  var filterButtons = document.querySelectorAll(".chip[data-filter]");
+  var serviceCards = document.querySelectorAll(".service-card[data-category]");
+  var faqButtons = document.querySelectorAll(".faq-question");
+  var cookieBanner = document.getElementById("cookie-banner");
+  var cookiePanel = document.getElementById("cookie-panel");
+  var cookieAccept = document.getElementById("cookie-accept");
+  var cookieReject = document.getElementById("cookie-reject");
+  var cookieManage = document.getElementById("cookie-manage");
+  var cookieSave = document.getElementById("cookie-save");
+  var consentAnalytics = document.getElementById("consent-analytics");
+  var consentMarketing = document.getElementById("consent-marketing");
+  var consentKey = "ba_cookie_consent_v1";
   var isLocalPreview =
     window.location.hostname === "127.0.0.1" ||
     window.location.hostname === "localhost" ||
@@ -107,6 +119,41 @@
     });
   }
 
+  /* ─── Treatment finder filter ────────────────────────── */
+  if (filterButtons.length && serviceCards.length) {
+    filterButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        var filter = button.getAttribute("data-filter") || "all";
+        filterButtons.forEach(function (b) { b.classList.toggle("is-active", b === button); });
+        serviceCards.forEach(function (card) {
+          var category = card.getAttribute("data-category") || "";
+          var show = filter === "all" || filter === category;
+          card.classList.toggle("is-hidden", !show);
+          card.setAttribute("aria-hidden", show ? "false" : "true");
+        });
+      });
+    });
+  }
+
+  /* ─── FAQ accordion ─────────────────────────────────── */
+  if (faqButtons.length) {
+    faqButtons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var answer = btn.parentElement ? btn.parentElement.nextElementSibling : null;
+        var expanded = btn.getAttribute("aria-expanded") === "true";
+        faqButtons.forEach(function (other) {
+          var otherAnswer = other.parentElement ? other.parentElement.nextElementSibling : null;
+          other.setAttribute("aria-expanded", "false");
+          if (otherAnswer) otherAnswer.hidden = true;
+        });
+        if (!expanded) {
+          btn.setAttribute("aria-expanded", "true");
+          if (answer) answer.hidden = false;
+        }
+      });
+    });
+  }
+
   /* ─── Scroll reveal ──────────────────────────────────── */
   if ("IntersectionObserver" in window) {
     var revealObserver = new IntersectionObserver(function (entries) {
@@ -185,6 +232,56 @@
     lightbox.addEventListener("click", function (e) { if (e.target === lightbox) closeLightbox(); });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && lightbox.classList.contains("is-open")) closeLightbox();
+    });
+  }
+
+  /* ─── GDPR cookie preferences ───────────────────────── */
+  function applyConsent(consent) {
+    document.documentElement.dataset.analyticsConsent = consent.analytics ? "granted" : "denied";
+    document.documentElement.dataset.marketingConsent = consent.marketing ? "granted" : "denied";
+  }
+
+  function saveConsent(consent) {
+    localStorage.setItem(consentKey, JSON.stringify(consent));
+    applyConsent(consent);
+    if (cookieBanner) cookieBanner.hidden = true;
+  }
+
+  if (cookieBanner && cookieAccept && cookieReject && cookieManage && cookieSave) {
+    var stored = localStorage.getItem(consentKey);
+    if (stored) {
+      try {
+        var parsed = JSON.parse(stored);
+        applyConsent(parsed);
+        if (consentAnalytics) consentAnalytics.checked = !!parsed.analytics;
+        if (consentMarketing) consentMarketing.checked = !!parsed.marketing;
+      } catch (e) {
+        cookieBanner.hidden = false;
+      }
+    } else {
+      cookieBanner.hidden = false;
+    }
+
+    cookieAccept.addEventListener("click", function () {
+      saveConsent({ essential: true, analytics: true, marketing: true, updatedAt: Date.now() });
+    });
+
+    cookieReject.addEventListener("click", function () {
+      saveConsent({ essential: true, analytics: false, marketing: false, updatedAt: Date.now() });
+    });
+
+    cookieManage.addEventListener("click", function () {
+      if (!cookiePanel) return;
+      cookiePanel.hidden = !cookiePanel.hidden;
+    });
+
+    cookieSave.addEventListener("click", function () {
+      saveConsent({
+        essential: true,
+        analytics: !!(consentAnalytics && consentAnalytics.checked),
+        marketing: !!(consentMarketing && consentMarketing.checked),
+        updatedAt: Date.now()
+      });
     });
   }
 

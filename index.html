@@ -26,8 +26,14 @@
     <meta name="keywords" content="aesthetics Oxfordshire, aesthetics Abingdon, aesthetics Didcot, aesthetics Oxford, anti-wrinkle injections Oxfordshire, dermal fillers Abingdon, lip filler Oxford, microneedling Oxfordshire, B12 injections, IV drip therapy, nurse-led aesthetics, Iwona Pawlik, Best Aesthetics Appleford, non-surgical treatments, aesthetic clinic near Oxford, Appleford aesthetics" />
     <meta name="author" content="Iwona Pawlik RGN, Best Aesthetics" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="bingbot" content="index, follow" />
+    <meta name="format-detection" content="telephone=no" />
     <meta name="theme-color" content="#0a0a0a" />
     <link rel="canonical" href="https://bestaesthetics.uk/" />
+    <link rel="alternate" href="https://bestaesthetics.uk/" hreflang="en-gb" />
+    <link rel="alternate" href="https://bestaesthetics.uk/" hreflang="x-default" />
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://bestaesthetics.uk/sitemap.xml" />
 
     <!-- Geo / local SEO -->
     <meta name="geo.region" content="GB-OXF" />
@@ -106,10 +112,72 @@
     }
     </script>
 
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Best Aesthetics",
+      "url": "https://bestaesthetics.uk/",
+      "inLanguage": "en-GB",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Best Aesthetics",
+        "url": "https://bestaesthetics.uk/",
+        "logo": "https://bestaesthetics.uk/images/logo-header.png"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://bestaesthetics.uk/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I know which aesthetic treatment is right for me?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Best Aesthetics starts with a medical consultation to review goals, skin quality, facial balance, and treatment history. Iwona Pawlik RGN provides a tailored plan and may recommend phasing treatment over time for natural results."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are anti-wrinkle and filler treatments safe?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Treatments are delivered by a registered nurse with medical assessment and consent. Safety suitability is checked first, and treatment is declined if risks outweigh benefits."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What areas do you cover around Oxfordshire?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The clinic is in Appleford-on-Thames and welcomes clients from Didcot, Abingdon, Oxford, Wallingford, and surrounding Oxfordshire areas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I book with Best Aesthetics?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can book online via Faces Consent, call 07518 010899, or use the contact form for appointment support and next steps."
+          }
+        }
+      ]
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20260506-1" />
+    <link rel="stylesheet" href="styles.css?v=20260506-2" />
     <link rel="icon" type="image/png" href="images/logo-header.png" />
   </head>
   <body>
@@ -145,6 +213,7 @@
             <li><a href="#services">Services</a></li>
             <li><a href="#pricing">Prices</a></li>
             <li><a href="#approach">Approach</a></li>
+            <li><a href="#faq">FAQ</a></li>
             <li><a href="#instagram">Instagram</a></li>
             <li><a href="#contact" class="nav-cta">Book</a></li>
           </ul>
@@ -524,35 +593,44 @@
               <a href="#pricing" class="services-prices-link">View the full treatment menu &amp; prices</a>
             </p>
           </div>
+          <div class="treatment-finder" aria-label="Treatment finder">
+            <p class="treatment-finder__label">Quick filter:</p>
+            <div class="treatment-finder__chips" role="group" aria-label="Filter treatments by category">
+              <button class="chip is-active" type="button" data-filter="all">All</button>
+              <button class="chip" type="button" data-filter="injectables">Injectables</button>
+              <button class="chip" type="button" data-filter="skin">Skin</button>
+              <button class="chip" type="button" data-filter="wellness">Wellness</button>
+            </div>
+          </div>
           <ul class="service-grid">
-            <li class="service-card reveal reveal--delay-1">
+            <li class="service-card reveal reveal--delay-1" data-category="injectables">
               <h3>Anti-wrinkle treatments</h3>
               <p>
                 Prescription muscle-relaxing injections for lines and wrinkles — assessed and delivered
                 with nursing-led care and natural movement in mind.
               </p>
             </li>
-            <li class="service-card reveal reveal--delay-2">
+            <li class="service-card reveal reveal--delay-2" data-category="injectables">
               <h3>Dermal fillers</h3>
               <p>
                 Volume and contouring where you need it, with a focus on balance, proportion, and
                 subtlety.
               </p>
             </li>
-            <li class="service-card reveal reveal--delay-3">
+            <li class="service-card reveal reveal--delay-3" data-category="injectables">
               <h3>Lip augmentation</h3>
               <p>
                 Shape, definition, and hydration tailored to your features — never a one-size look.
               </p>
             </li>
-            <li class="service-card reveal reveal--delay-4">
+            <li class="service-card reveal reveal--delay-4" data-category="skin">
               <h3>Microneedling</h3>
               <p>
                 Collagen-stimulating skin needling to improve texture, fine lines, and overall skin
                 quality.
               </p>
             </li>
-            <li class="service-card reveal reveal--delay-5">
+            <li class="service-card reveal reveal--delay-5" data-category="wellness">
               <h3>Vitamin&nbsp;B12</h3>
               <p>
                 Intramuscular B12 for clients who are low or deficient. Vitamin&nbsp;B12 contributes to the
@@ -561,7 +639,7 @@
                 I’ll take a history and advise whether injections are appropriate for you.
               </p>
             </li>
-            <li class="service-card reveal reveal--delay-1">
+            <li class="service-card reveal reveal--delay-1" data-category="wellness">
               <h3>IV Drip Therapy</h3>
               <p>
                 Intravenous hydration and vitamin protocols in clinic, planned after your consultation and
@@ -687,6 +765,69 @@
         </div>
       </section>
 
+      <section class="section faq" id="faq" aria-labelledby="faq-heading">
+        <div class="section-inner faq-inner reveal">
+          <header class="section-header faq-header">
+            <h2 id="faq-heading" class="section-title">Frequently asked questions</h2>
+            <p class="section-subtitle">Clear answers to common treatment, safety, and booking questions.</p>
+          </header>
+          <div class="faq-list" role="list">
+            <article class="faq-item" role="listitem">
+              <h3>
+                <button class="faq-question" type="button" aria-expanded="false">
+                  How do I know which treatment is right for me?
+                </button>
+              </h3>
+              <div class="faq-answer" hidden>
+                <p>
+                  We begin with a consultation to understand your goals, assess suitability, and build a plan
+                  that prioritises natural-looking outcomes and long-term facial balance.
+                </p>
+              </div>
+            </article>
+            <article class="faq-item" role="listitem">
+              <h3>
+                <button class="faq-question" type="button" aria-expanded="false">
+                  Are treatments delivered by a medical professional?
+                </button>
+              </h3>
+              <div class="faq-answer" hidden>
+                <p>
+                  Yes. Treatments are delivered by Iwona Pawlik, a registered nurse (RGN), with full medical
+                  consultation, consent, and suitability screening.
+                </p>
+              </div>
+            </article>
+            <article class="faq-item" role="listitem">
+              <h3>
+                <button class="faq-question" type="button" aria-expanded="false">
+                  Which areas do you serve in Oxfordshire?
+                </button>
+              </h3>
+              <div class="faq-answer" hidden>
+                <p>
+                  The clinic is based in Appleford-on-Thames and regularly welcomes clients from Didcot,
+                  Abingdon, Oxford, Wallingford, and surrounding Oxfordshire areas.
+                </p>
+              </div>
+            </article>
+            <article class="faq-item" role="listitem">
+              <h3>
+                <button class="faq-question" type="button" aria-expanded="false">
+                  How can I book my consultation?
+                </button>
+              </h3>
+              <div class="faq-answer" hidden>
+                <p>
+                  You can book online through Faces Consent, call 07518 010899, or send a message via the
+                  contact form for support with appointments.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section class="section instagram" id="instagram" aria-labelledby="instagram-heading">
         <div class="section-inner instagram-inner">
           <div class="instagram-copy">
@@ -790,7 +931,39 @@
       </div>
     </footer>
 
-    <script src="script.js?v=20260506-1"></script>
+    <!-- GDPR cookie consent -->
+    <aside class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Cookie preferences" hidden>
+      <div class="cookie-banner__inner">
+        <h2 class="cookie-banner__title">Cookie preferences</h2>
+        <p class="cookie-banner__text">
+          We use essential cookies for site functionality and optional cookies to improve performance.
+          You can accept all, reject optional cookies, or manage detailed preferences.
+        </p>
+        <div class="cookie-banner__actions">
+          <button type="button" class="btn btn-ghost cookie-btn" id="cookie-reject">Reject optional</button>
+          <button type="button" class="btn btn-ghost cookie-btn" id="cookie-manage">Manage</button>
+          <button type="button" class="btn btn-primary cookie-btn" id="cookie-accept">Accept all</button>
+        </div>
+      </div>
+      <div class="cookie-panel" id="cookie-panel" hidden>
+        <h3 class="cookie-panel__title">Manage cookie settings</h3>
+        <label class="cookie-option">
+          <input type="checkbox" checked disabled />
+          <span>Essential cookies (required)</span>
+        </label>
+        <label class="cookie-option">
+          <input type="checkbox" id="consent-analytics" />
+          <span>Analytics cookies</span>
+        </label>
+        <label class="cookie-option">
+          <input type="checkbox" id="consent-marketing" />
+          <span>Marketing cookies</span>
+        </label>
+        <button type="button" class="btn btn-primary cookie-btn" id="cookie-save">Save preferences</button>
+      </div>
+    </aside>
+
+    <script src="script.js?v=20260506-2"></script>
 
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" hidden>
