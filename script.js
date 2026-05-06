@@ -7,8 +7,7 @@
   var toggle      = document.querySelector(".nav-toggle");
   var navLinks    = document.querySelectorAll(".site-nav a");
   var yearEl      = document.getElementById("year");
-  var form        = document.querySelector(".contact-form");
-  var formNote    = document.querySelector(".form-note");
+  var forms       = document.querySelectorAll("form[data-web3forms]");
   var backToTop   = document.getElementById("back-to-top");
   var lightbox      = document.getElementById("lightbox");
   var lightboxImg   = document.getElementById("lightbox-img");
@@ -374,24 +373,83 @@
     });
   }
 
-  /* ─── Contact form ───────────────────────────────────── */
-  if (form && formNote) {
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var name    = form.querySelector("#name");
-      var email   = form.querySelector("#email");
-      var message = form.querySelector("#message");
-      if (!name || !email || !message) return;
+  /* ─── Contact forms ──────────────────────────────────── */
+  if (forms.length) {
+    forms.forEach(function (form) {
+      var formNote = form.querySelector(".form-note");
+      var submitButton = form.querySelector("button[type='submit']");
+      var defaultButtonLabel = submitButton ? submitButton.textContent : "";
 
-      if (!name.value.trim() || !email.value.trim() || !message.value.trim()) {
-        formNote.textContent = "Please fill in all fields.";
-        formNote.style.color = "var(--color-ink)";
-        return;
-      }
+      form.addEventListener("submit", function (e) {
+        var formData;
+        var accessKey;
 
-      formNote.textContent = "Thanks — this is a demo form. Connect it to your email or backend when you're ready.";
-      formNote.style.color = "var(--color-gold-dark)";
-      form.reset();
+        e.preventDefault();
+
+        if (!form.reportValidity()) {
+          if (formNote) {
+            formNote.textContent = "Please complete all required fields.";
+            formNote.style.color = "var(--color-ink)";
+          }
+          return;
+        }
+
+        formData = new FormData(form);
+        accessKey = String(formData.get("access_key") || "").trim();
+
+        if (!accessKey || accessKey === "YOUR_WEB3FORMS_ACCESS_KEY") {
+          if (formNote) {
+            formNote.textContent = "Add your Web3Forms access key to this form before publishing submissions.";
+            formNote.style.color = "var(--color-ink)";
+          }
+          return;
+        }
+
+        if (formNote) {
+          formNote.textContent = "Sending your enquiry...";
+          formNote.style.color = "var(--color-gold-dark)";
+        }
+
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.textContent = "Sending...";
+        }
+
+        fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            Accept: "application/json"
+          },
+          body: formData
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (result) {
+            if (!result || !result.success) {
+              throw new Error(result && result.message ? result.message : "Submission failed.");
+            }
+
+            if (formNote) {
+              formNote.textContent = form.getAttribute("data-success-message") || "Thanks. Your message has been sent.";
+              formNote.style.color = "var(--color-gold-dark)";
+            }
+
+            form.reset();
+          })
+          .catch(function () {
+            if (formNote) {
+              formNote.textContent = form.getAttribute("data-error-message") || "Sorry, something went wrong. Please try again or call the clinic.";
+              formNote.style.color = "var(--color-ink)";
+            }
+          })
+          .finally(function () {
+            if (submitButton) {
+              submitButton.disabled = false;
+              submitButton.textContent = defaultButtonLabel;
+            }
+          });
+      });
     });
   }
 

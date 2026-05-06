@@ -23,7 +23,6 @@
     <meta name="description" content="Best Aesthetics is a nurse-led clinic in Appleford-on-Thames offering anti-wrinkle treatments, dermal fillers, microneedling, vitamin B12 and IV drip therapy. Serving Oxfordshire, Didcot, Abingdon and Oxford." />
     <link rel="canonical" href="https://bestaesthetics.uk/" />
     <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
-    <meta name="theme-color" content="#0a0a0a" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -117,6 +116,45 @@
             <li class="teaser-card"><h3>Prices</h3><p>See treatment sheets and book online.</p><a href="prices.html">View prices</a></li>
             <li class="teaser-card"><h3>Contact</h3><p>Ready to start? Book your consultation now.</p><a href="contact.html">Get in touch</a></li>
           </ul>
+        </div>
+      </section>
+
+      <section class="section contact" aria-labelledby="consultation-heading">
+        <div class="section-inner contact-inner reveal">
+          <div class="contact-copy">
+            <h2 id="consultation-heading" class="section-title">Book a consultation</h2>
+            <p class="section-lede">Share what you are considering and we will guide you to the right treatment plan.</p>
+            <address class="contact-details">
+              <p><span class="label">Phone</span><a href="tel:+447518010899">07518 010899</a><span class="contact-hint"> · By appointment only</span></p>
+              <p><span class="label">Location</span>1 Main Road, Appleford-on-Thames, Oxfordshire <span class="postcode">OX14 4PG</span></p>
+              <p><span class="label">Instagram</span><a href="https://www.instagram.com/bestaestheticsappleford/" target="_blank" rel="noopener noreferrer">@bestaestheticsappleford</a></p>
+            </address>
+          </div>
+          <form class="contact-form" action="https://api.web3forms.com/submit" method="post" novalidate id="home-consultation-form" data-web3forms data-success-message="Thanks. Your consultation request has been sent and we will be in touch shortly." data-error-message="Sorry, your request could not be sent just now. Please try again or call the clinic.">
+            <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
+            <input type="hidden" name="subject" value="New consultation request from Best Aesthetics homepage" />
+            <input type="hidden" name="from_name" value="Best Aesthetics Website" />
+            <input type="hidden" name="redirect" value="https://bestaesthetics.uk/?sent=1" />
+            <input type="hidden" name="botcheck" value="" />
+            <div class="field">
+              <label for="home-name">Name</label>
+              <input type="text" id="home-name" name="name" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="home-email">Email</label>
+              <input type="email" id="home-email" name="email" autocomplete="email" required />
+            </div>
+            <div class="field">
+              <label for="home-phone">Phone number</label>
+              <input type="tel" id="home-phone" name="phone" autocomplete="tel" inputmode="tel" />
+            </div>
+            <div class="field">
+              <label for="home-message">What are you interested in?</label>
+              <textarea id="home-message" name="message" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">Request a callback</button>
+            <p class="form-note" role="status" aria-live="polite"></p>
+          </form>
         </div>
       </section>
     </main>
